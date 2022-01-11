@@ -12,15 +12,34 @@ class App extends React.Component {
   
   componentDidMount() {
     console.log("App: Component Has Mounted.");
-    axios.get('https://api.github.com/users/ryanghoward')
+    axios.get('https://api.github.com/users/Divici')
       .then(resp=>{
-        console.log(resp.data);
-        // this.setState({
-        //   ...this.state,
-        //   user: resp.data.login
-        // })
-      })
+        this.setState({
+          ...this.state,
+          user: resp.data
+        });
+      });
+
+    axios.get('https://api.github.com/users/Divici/followers')
+      .then(resp=>{
+        this.setState({
+          ...this.state,
+          followers: resp.data
+        });
+      });
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if(prevState.user !== this.state.user){
+  //     axios.get('https://api.github.com/users/Divici/followers')
+  //     .then(resp=>{
+  //       this.setState({
+  //         ...this.state,
+  //         followers: resp.data
+  //       });
+  //     });
+  //   }
+  // }
 
   render() {
     return(<div className='wrapper'>
@@ -36,9 +55,9 @@ class App extends React.Component {
         </form>
       </div>
 
-      <User />
+      <User user={this.state.user}/>
 
-      <FollowerList />
+      <FollowerList followers={this.state.followers}/>
 
     </div>);
   }

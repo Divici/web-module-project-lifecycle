@@ -6,7 +6,10 @@ class Follower extends React.Component {
 
         return(
             <div>
-                <h2>Followers will go here</h2>
+                <div className=' flex follower'>
+                    <img src={this.props.follower.avatar_url} alt='follower'></img>
+                    <h3>{this.props.follower.login}</h3>
+                </div>
             </div>
         )
     }

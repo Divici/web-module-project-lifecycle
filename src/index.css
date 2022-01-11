@@ -41,13 +41,15 @@ code {
   background-color: lightslategray;
 }
 
-.user{
+.user {
+  margin: 2%;
+  margin-left: 0;
+}
+
+.user img{
   width: 250px;
-  height: 200px;
   background-color: cadetblue;
   border: 1px solid black;
-  margin: 1%;
-  margin-left: 0;
 }
 
 .followers {
@@ -56,9 +58,7 @@ code {
 }
 
 .follower {
-  width: 250px;
-  height: 250px;
-  background-color: cadetblue;
+  width: 200px;
   flex-direction: column;
   margin-bottom: 50px;
 }
@@ -69,7 +69,7 @@ code {
 }
 
 .follower img {
-  width: 90%;
+  width: 100%;
   background-color: blue;
   border: 1px solid black;
   margin: 1% auto;
