@@ -5,14 +5,14 @@ import FollowerList from './components/FollowerList';
 
 class App extends React.Component {
   state = {
-    search: '',
+    search: 'Divici',
     user: [],
     followers: []
   }
   
   componentDidMount() {
     console.log("App: Component Has Mounted.");
-    axios.get('https://api.github.com/users/Divici')
+    axios.get(`https://api.github.com/users/${this.state.search}`)
       .then(resp=>{
         this.setState({
           ...this.state,
@@ -20,26 +20,40 @@ class App extends React.Component {
         });
       });
 
-    axios.get('https://api.github.com/users/Divici/followers')
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('The component has updated');
+    if(prevState.user !== this.state.user){
+      axios.get(`https://api.github.com/users/${this.state.search}/followers`)
       .then(resp=>{
         this.setState({
           ...this.state,
           followers: resp.data
         });
       });
+    }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevState.user !== this.state.user){
-  //     axios.get('https://api.github.com/users/Divici/followers')
-  //     .then(resp=>{
-  //       this.setState({
-  //         ...this.state,
-  //         followers: resp.data
-  //       });
-  //     });
-  //   }
-  // }
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      search: e.target.value
+    });
+  }
+
+  handleSearch = e => {
+    e.preventDefault();
+
+    const searched = this.state.search;
+    axios.get(`https://api.github.com/users/${searched}`)
+      .then(resp => {
+        this.setState({
+          ...this.state,
+          user: resp.data
+        })
+      })
+  }
 
   render() {
     return(<div className='wrapper'>
@@ -49,9 +63,11 @@ class App extends React.Component {
         <form>
           <input
             placeholder='Github Handle'
+            value={this.state.search}
+            onChange={this.handleChange}
           >
           </input>
-          <button>Search</button>
+          <button onClick={this.handleSearch}>Search</button>
         </form>
       </div>
 

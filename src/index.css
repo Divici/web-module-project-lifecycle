@@ -61,6 +61,7 @@ code {
   width: 200px;
   flex-direction: column;
   margin-bottom: 50px;
+  margin-right: 20px;
 }
 
 .follower h3 {
