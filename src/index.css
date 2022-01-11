@@ -60,6 +60,7 @@ code {
   height: 250px;
   background-color: cadetblue;
   flex-direction: column;
+  margin-bottom: 50px;
 }
 
 .follower h3 {

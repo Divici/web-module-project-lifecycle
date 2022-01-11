@@ -1,6 +1,27 @@
 import React from 'react';
+import axios from 'axios';
+import User from './components/User';
+import FollowerList from './components/FollowerList';
 
 class App extends React.Component {
+  state = {
+    search: '',
+    user: [],
+    followers: []
+  }
+  
+  componentDidMount() {
+    console.log("App: Component Has Mounted.");
+    axios.get('https://api.github.com/users/ryanghoward')
+      .then(resp=>{
+        console.log(resp.data);
+        // this.setState({
+        //   ...this.state,
+        //   user: resp.data.login
+        // })
+      })
+  }
+
   render() {
     return(<div className='wrapper'>
       <h1>GITHUB INFO</h1>
@@ -15,37 +36,9 @@ class App extends React.Component {
         </form>
       </div>
 
-      <div className='flex'>
-        <div className='user'>
-          <img src='' alt='person'></img>
-        </div>
-        <div className='info'>
-          <h2>Charles Linkler</h2>
-          <h3>(Clinkler_Programmer)</h3>
-          <p>Total Repos: 101</p>
-          <p>Total Followers: 29</p>
-        </div>
-      </div>
+      <User />
 
-      <div className='flex followers'>
-        <h2 className='span'>FOLLOWERS:</h2>
-        <div className=' flex follower'>
-          <img src='' alt='follower'></img>
-          <h3>NicholAlexander</h3>
-        </div>
-        <div className=' flex follower'>
-          <img src='' alt='follower'></img>
-          <h3>NicholAlexander</h3>
-        </div>
-        <div className=' flex follower'>
-          <img src='' alt='follower'></img>
-          <h3>NicholAlexander</h3>
-        </div>
-        <div className='flex follower'>
-          <img src='' alt='follower'></img>
-          <h3>NicholAlexander</h3>
-        </div>
-      </div>
+      <FollowerList />
 
     </div>);
   }
