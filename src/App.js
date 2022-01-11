@@ -11,7 +11,6 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-    console.log("App: Component Has Mounted.");
     axios.get(`https://api.github.com/users/${this.state.search}`)
       .then(resp=>{
         this.setState({
@@ -23,7 +22,6 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('The component has updated');
     if(prevState.user !== this.state.user){
       axios.get(`https://api.github.com/users/${this.state.search}/followers`)
       .then(resp=>{

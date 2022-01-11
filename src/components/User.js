@@ -3,7 +3,6 @@ import React from "react";
 class User extends React.Component {
 
     render(){
-        console.log('testing user', this.props.user);
         const user = this.props.user;
         return(
             <div className='flex'>
