@@ -8,7 +8,7 @@ class FollowerList extends React.Component {
             <div className='flex followers'>
                 <h2 className='span'>FOLLOWERS:</h2>
                 {this.props.followers.map(follower => (
-                    <Follower key={follower.id} follower={follower}/>
+                    <Follower key={follower.id} follower={follower} handleChange={this.props.handleChange}/>
                 ))}
             </div>
         )

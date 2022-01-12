@@ -33,11 +33,21 @@ class App extends React.Component {
     }
   }
 
-  handleChange = e => {
+  handleChange = (e, searched) => {
+    !searched?
     this.setState({
       ...this.state,
       search: e.target.value
-    });
+    })
+    :
+    axios.get(`https://api.github.com/users/${searched}`)
+      .then(resp => {
+        this.setState({
+          ...this.state,
+          search: searched,
+          user: resp.data
+        })
+      })
   }
 
   handleSearch = e => {
@@ -71,7 +81,7 @@ class App extends React.Component {
 
       <User user={this.state.user}/>
 
-      <FollowerList followers={this.state.followers}/>
+      <FollowerList followers={this.state.followers} handleChange={this.handleChange}/>
 
     </div>);
   }
